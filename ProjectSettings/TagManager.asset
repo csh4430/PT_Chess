@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Board
+    uniqueID: 2086093123
+    locked: 0
+  - name: Decal
+    uniqueID: 241723113
+    locked: 0
+  - name: UnderParticle
+    uniqueID: 1279373939
+    locked: 0
+  - name: Unit
+    uniqueID: 3507911359
+    locked: 0
+  - name: TopParticle
+    uniqueID: 2371876143
+    locked: 0
