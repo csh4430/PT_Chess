@@ -5,6 +5,7 @@ using System.Linq;
 using _01.Scripts.Decals;
 using _01.Scripts.Managers;
 using _01.Scripts.Utils;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -14,8 +15,11 @@ namespace _01.Scripts.Units
     {
         [SerializeField]
         private Vector2Int gridPosition = Vector2Int.zero;
-        public Vector2Int GridPosition => gridPosition;
-        
+        public Vector2Int GridPosition
+        {
+            get => gridPosition;
+            set => gridPosition = value;
+        }
         [SerializeField] private bool isEnemy = false;
         public bool IsEnemy => isEnemy;
 
@@ -229,6 +233,12 @@ namespace _01.Scripts.Units
             var decal = nextDecal.GetComponent<Decal>();
             if (decal == null) return;
             decal.Move();
+        }
+
+        public void Stop()
+        {
+            isMoving = false;
+            DOTween.Kill(transform);
         }
     }
 }

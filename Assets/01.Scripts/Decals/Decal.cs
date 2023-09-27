@@ -56,16 +56,40 @@ namespace _01.Scripts.Decals
         {
             owner.Move();
             var unit = Define.GetUnit(Util.PositionToGrid(cell.transform.position));
-            owner.transform.DOJump(cell.transform.position, 1f, 1, 0.5f).OnComplete(() =>
+            if (owner.IsEnemy)
             {
-                owner.Init();
-                if (!canKill) return;
-                var particle = Instantiate(_breakParticle, owner.transform.position, Quaternion.Euler(-90, 0, 0));
-                particle.GetComponent<Renderer>().material.SetColor("_Color", unit.IsEnemy ? Util.BlackColor : Util.WhiteColor);
-                GameManager.Units.Remove(unit);
-                Destroy(unit.gameObject);
-            });
-            owner.DeSelect();
+                owner.transform.DOScaleY(1.25f, 0.5f).OnComplete(() =>
+                {
+                    owner.transform.DOScaleY(1f, 0.5f).OnComplete(() =>
+                    {
+                        owner.transform.DOJump(cell.transform.position, 1f, 1, 0.5f).OnComplete(() =>
+                         {
+                            owner.Init();
+                            if (!canKill) return;
+                            var particle = Instantiate(_breakParticle, owner.transform.position, Quaternion.Euler(-90, 0, 0));
+                            particle.GetComponent<Renderer>().material.SetColor("_Color", unit.IsEnemy ? Util.BlackColor : Util.WhiteColor);
+                            GameManager.Units.Remove(unit);
+                            Destroy(unit.gameObject);
+                        });
+                    });
+                });
+
+                owner.DeSelect();
+            }
+            else
+            {
+                owner.transform.DOJump(cell.transform.position, 1f, 1, 0.5f).OnComplete(() =>
+                {
+                    owner.Init();
+                    if (!canKill) return;
+                    var particle = Instantiate(_breakParticle, owner.transform.position, Quaternion.Euler(-90, 0, 0));
+                    particle.GetComponent<Renderer>().material.SetColor("_Color", unit.IsEnemy ? Util.BlackColor : Util.WhiteColor);
+                    unit.Stop();
+                    GameManager.Units.Remove(unit);
+                    Destroy(unit.gameObject);
+                });
+                owner.DeSelect();
+            }
         }
     }
 }
